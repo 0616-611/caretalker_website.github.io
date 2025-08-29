@@ -332,17 +332,18 @@
         }
 
         .feature-illustration {
-            width: 300px;
-            height: 300px;
-            border-radius: 24px;
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8rem;
+            font-size: 4rem;
             position: relative;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.25);
+            opacity: 0.85;
         }
 
         .feature-illustration::before {
@@ -666,7 +667,16 @@
             .feature-illustration {
                 width: 200px;
                 height: 200px;
-                font-size: 5rem;
+                border-radius: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 4rem;
+                position: relative;
+                background: linear-gradient(135deg, var(--primary), var(--primary-light));
+                color: white;
+                box-shadow: 0 15px 40px rgba(255, 107, 53, 0.25);
+                opacity: 0.85;
             }
 
             .feature-title {
@@ -765,20 +775,7 @@
                                 <p class="feature-description">
                                     毎日の自然な会話を通じて、体調や気分の変化を優しく見守ります。
                                 </p>
-                                <div class="feature-highlights">
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">日常会話での体調確認</span>
-                                    </div>
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">気分や痛みの変化を察知</span>
-                                    </div>
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">薬の服用時間をお知らせ</span>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -796,20 +793,7 @@
                                 <p class="feature-description">
                                     デイサービスや医療機関と情報を共有し、継続的なケアを実現します。
                                 </p>
-                                <div class="feature-highlights">
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">デイサービスとの情報共有</span>
-                                    </div>
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">医療機関への状況報告</span>
-                                    </div>
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">ケアプランの統合管理</span>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -827,20 +811,7 @@
                                 <p class="feature-description">
                                     日々の活動データから、詳細なカルテやケアレポートを自動生成します。
                                 </p>
-                                <div class="feature-highlights">
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">日常生活の記録を自動化</span>
-                                    </div>
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">健康状態の変化をグラフ化</span>
-                                    </div>
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">介護記録の効率化</span>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -858,20 +829,7 @@
                                 <p class="feature-description">
                                     玄関に設置するだけで、外出・帰宅の見守りと安全確認を行います。
                                 </p>
-                                <div class="feature-highlights">
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">外出・帰宅時の安全確認</span>
-                                    </div>
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">長時間外出時の自動通知</span>
-                                    </div>
-                                    <div class="highlight-item">
-                                        <div class="highlight-icon">✓</div>
-                                        <span class="highlight-text">簡単設置で工事不要</span>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -895,39 +853,46 @@
     <section class="how-it-works">
         <div class="section-container">
             <div class="section-header fade-in">
-                <div class="section-badge">開発ロードマップ</div>
-                <h2 class="section-title">開発の進め方</h2>
+                <div class="section-badge">目指しているもの</div>
+                <h2 class="section-title">メリット</h2>
                 <p class="section-description">
-                    段階的な開発アプローチで、確実で安全なシステムの構築を目指しています。
+                    導入することで得られる価値
                 </p>
             </div>
             
-            <div class="steps-container">
+<div class="steps-container">
                 <div class="step fade-in">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">研究開発フェーズ</h3>
+                    <h3 class="step-title">安心感の向上</h3>
                     <p class="step-description">
-                        AIアルゴリズムとセンサー技術の基礎研究。プロトタイプの開発と基本機能の検証を行っています。
+                        AIが会話や外出状況を分析し、異常を検知した際は家族や緊急サービスへ即時連絡することで迅速な対応を可能にする。
                     </p>
                 </div>
                 
                 <div class="step fade-in">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">実証実験フェーズ</h3>
+                    <h3 class="step-title">尊厳の維持</h3>
                     <p class="step-description">
-                        限定的な環境でのテスト運用を計画中。安全性と有効性の検証を慎重に進める予定です。
+                        プライベート空間には介入せず、玄関で見守る仕組みにより、徘徊リスクを管理しながらプライバシーを守る。
                     </p>
                 </div>
                 
                 <div class="step fade-in">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">サービス開始準備</h3>
+                    <h3 class="step-title">その時の状況把握</h3>
                     <p class="step-description">
-                        2025年のサービス開始に向けて、システムの最終調整とサポート体制の構築を進めます。
+                        会話や映像記録により、万が一の徘徊時にも発見をサポートできる。
+                    </p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">介護施設による第３の目</h3>
+                    <p class="step-description">
+                        AIが日常の会話や行動から認知状態を記録分析し、そのデータを医療機関や介護施設と共有することで、認知症の進行や変化を専門家や家族が把握しやすくなる仕組み。
                     </p>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Footer -->
