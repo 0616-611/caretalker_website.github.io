@@ -246,6 +246,7 @@
         .features {
             padding: 8rem 0;
             background: var(--white);
+            overflow: hidden;
         }
 
         .section-container {
@@ -285,87 +286,204 @@
             margin: 0 auto;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
+        .features-carousel {
             position: relative;
-            overflow: hidden;
+            height: 600px;
+            margin-top: 4rem;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .features-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
         }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 16px;
+        .feature-slide {
+            min-width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            position: relative;
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 53, 0.05) 0%, 
+                rgba(255, 140, 66, 0.05) 50%, 
+                rgba(255, 165, 85, 0.05) 100%);
+            border-radius: 32px;
+            overflow: hidden;
+        }
+
+        .feature-content {
+            display: flex;
+            align-items: center;
+            gap: 6rem;
+            max-width: 900px;
+            width: 100%;
+            padding: 0 4rem;
+        }
+
+        .feature-visual {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 400px;
+        }
+
+        .feature-illustration {
+            width: 300px;
+            height: 300px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            font-size: 1.5rem;
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+        }
+
+        .feature-illustration::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 140, 66, 0.1));
+            border-radius: 32px;
+            z-index: -1;
+        }
+
+        .feature-info {
+            flex: 1;
+            text-align: left;
         }
 
         .feature-title {
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--gray-900);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
         .feature-description {
             color: var(--gray-600);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
         }
 
-        .feature-benefits {
-            list-style: none;
+        .feature-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
-        .feature-benefits li {
+        .highlight-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--gray-700);
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 107, 53, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
         }
 
-        .feature-benefits li::before {
-            content: '✓';
-            color: var(--success);
+        .highlight-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
             font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .highlight-text {
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: var(--gray-200);
+            color: var(--gray-600);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .carousel-btn:disabled:hover {
+            background: var(--gray-200);
+            color: var(--gray-600);
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gray-300);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot:hover {
+            background: var(--primary-light);
+            transform: scale(1.3);
+        }
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Touch/swipe support */
+        .features-carousel {
+            position: relative;
+            height: 600px;
+            margin-top: 4rem;
+            touch-action: pan-y;
+            user-select: none;
         }
 
         /* How it Works */
@@ -535,8 +653,33 @@
                 align-items: center;
             }
 
-            .features-grid {
-                grid-template-columns: 1fr;
+            .feature-content {
+                flex-direction: column;
+                gap: 3rem;
+                padding: 2rem;
+            }
+
+            .feature-visual {
+                height: 250px;
+            }
+
+            .feature-illustration {
+                width: 200px;
+                height: 200px;
+                font-size: 5rem;
+            }
+
+            .feature-title {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .feature-info {
+                text-align: center;
+            }
+
+            .features-carousel {
+                height: 700px;
             }
 
             .steps-container {
@@ -592,11 +735,7 @@
             <p class="hero-subtitle fade-in">
                 最先端のAI技術で大切な家族を見守るシステムを開発中。介護の不安を解消し、安心できる毎日をサポートする革新的なソリューションです。
             </p>
-            <div class="hero-actions fade-in">
-                <a href="#features" class="btn-primary">
-                    詳細を見る →
-                </a>
-            </div>
+
         </div>
     </section>
 
@@ -611,57 +750,142 @@
                 </p>
             </div>
             
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🛡️</div>
-                    <h3 class="feature-title">24時間AI監視システム</h3>
-                    <p class="feature-description">
-                        高精度センサーとAIアルゴリズムの開発を進めており、異常な行動パターンや緊急事態の検知システムを構築中です。
-                    </p>
-                    <ul class="feature-benefits">
-                        <li>転倒・失神の自動検知機能</li>
-                        <li>生活リズム異常の早期発見</li>
-                        <li>健康状態の継続的モニタリング</li>
-                    </ul>
+            <div class="features-carousel">
+                <div class="features-container" id="featuresContainer">
+                    <!-- Slide 1: 対話で体調をうかがう -->
+                    <div class="feature-slide">
+                        <div class="feature-content">
+                            <div class="feature-visual">
+                                <div class="feature-illustration">
+                                    💬
+                                </div>
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title">AIとの対話機能</h3>
+                                <p class="feature-description">
+                                    毎日の自然な会話を通じて、体調や気分の変化を優しく見守ります。
+                                </p>
+                                <div class="feature-highlights">
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">日常会話での体調確認</span>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">気分や痛みの変化を察知</span>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">薬の服用時間をお知らせ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: 施設との連携 -->
+                    <div class="feature-slide">
+                        <div class="feature-content">
+                            <div class="feature-visual">
+                                <div class="feature-illustration">
+                                    🏥
+                                </div>
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title">施設連携システム</h3>
+                                <p class="feature-description">
+                                    デイサービスや医療機関と情報を共有し、継続的なケアを実現します。
+                                </p>
+                                <div class="feature-highlights">
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">デイサービスとの情報共有</span>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">医療機関への状況報告</span>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">ケアプランの統合管理</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: カルテ・レポート自動作成 -->
+                    <div class="feature-slide">
+                        <div class="feature-content">
+                            <div class="feature-visual">
+                                <div class="feature-illustration">
+                                    📋
+                                </div>
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title">自動レポート作成</h3>
+                                <p class="feature-description">
+                                    日々の活動データから、詳細なカルテやケアレポートを自動生成します。
+                                </p>
+                                <div class="feature-highlights">
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">日常生活の記録を自動化</span>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">健康状態の変化をグラフ化</span>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">介護記録の効率化</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: 玄関での設置 -->
+                    <div class="feature-slide">
+                        <div class="feature-content">
+                            <div class="feature-visual">
+                                <div class="feature-illustration">
+                                    🚪
+                                </div>
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title">玄関設置システム</h3>
+                                <p class="feature-description">
+                                    玄関に設置するだけで、外出・帰宅の見守りと安全確認を行います。
+                                </p>
+                                <div class="feature-highlights">
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">外出・帰宅時の安全確認</span>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">長時間外出時の自動通知</span>
+                                    </div>
+                                    <div class="highlight-item">
+                                        <div class="highlight-icon">✓</div>
+                                        <span class="highlight-text">簡単設置で工事不要</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">👤</div>
-                    <h3 class="feature-title">プライバシー重視設計</h3>
-                    <p class="feature-description">
-                        カメラを使わない非接触型センシング技術の研究開発により、個人の尊厳を最大限に配慮したシステムを目指しています。
-                    </p>
-                    <ul class="feature-benefits">
-                        <li>映像記録を一切残さない設計</li>
-                        <li>行動パターンの匿名化処理</li>
-                        <li>データセキュリティの徹底</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">AI分析エンジン</h3>
-                    <p class="feature-description">
-                        機械学習アルゴリズムの研究により、個人の生活パターンを学習し、健康状態の変化を予測するシステムを開発中です。
-                    </p>
-                    <ul class="feature-benefits">
-                        <li>個別化された分析レポート</li>
-                        <li>異常パターンの早期検出</li>
-                        <li>健康予測アルゴリズム</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📱</div>
-                    <h3 class="feature-title">家族向けアプリ</h3>
-                    <p class="feature-description">
-                        離れて暮らす家族が安心できるよう、直感的で使いやすいモバイルアプリケーションの開発を進めています。
-                    </p>
-                    <ul class="feature-benefits">
-                        <li>リアルタイム状況確認</li>
-                        <li>異常時の即座通知機能</li>
-                        <li>日常レポートの共有</li>
-                    </ul>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevBtn">‹</button>
+                    <div class="carousel-dots">
+                        <div class="dot active" onclick="goToSlide(0)"></div>
+                        <div class="dot" onclick="goToSlide(1)"></div>
+                        <div class="dot" onclick="goToSlide(2)"></div>
+                        <div class="dot" onclick="goToSlide(3)"></div>
+                    </div>
+                    <button class="carousel-btn" id="nextBtn">›</button>
                 </div>
             </div>
         </div>
@@ -764,6 +988,135 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
+
+        // Features Carousel
+        let currentSlide = 0;
+        const totalSlides = 4;
+        const featuresContainer = document.getElementById('featuresContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('.dot');
+
+        function updateCarousel() {
+            const translateX = -currentSlide * 100;
+            featuresContainer.style.transform = `translateX(${translateX}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Update buttons
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateCarousel();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateCarousel();
+            }
+        }
+
+        // Button event listeners
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+
+        // Touch/Swipe support
+        let startX = 0;
+        let endX = 0;
+        let startY = 0;
+        let endY = 0;
+
+        featuresContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+
+        featuresContainer.addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Prevent scrolling while swiping
+        });
+
+        featuresContainer.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            endY = e.changedTouches[0].clientY;
+            
+            const deltaX = startX - endX;
+            const deltaY = Math.abs(startY - endY);
+            
+            // Only trigger swipe if horizontal movement is greater than vertical
+            if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+
+        // Mouse drag support for desktop
+        let isDragging = false;
+        let mouseStartX = 0;
+
+        featuresContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            mouseStartX = e.clientX;
+            featuresContainer.style.cursor = 'grabbing';
+        });
+
+        featuresContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+
+        featuresContainer.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            featuresContainer.style.cursor = 'grab';
+            
+            const mouseEndX = e.clientX;
+            const deltaX = mouseStartX - mouseEndX;
+            
+            if (Math.abs(deltaX) > 100) { // Minimum drag distance
+                if (deltaX > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+
+        featuresContainer.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                featuresContainer.style.cursor = 'grab';
+            }
+        });
+
+        // Initialize carousel
+        updateCarousel();
+        featuresContainer.style.cursor = 'grab';
     </script>
 </body>
 </html>
