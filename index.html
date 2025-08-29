@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caretalker - 家族の安全を24時間見守るAIケアシステム</title>
+    <title>テクノロジーで未来を豊かに</title>
     <style>
         :root {
             --primary: #ff6b35;
@@ -31,14 +31,22 @@
             box-sizing: border-box;
         }
 
+        .footer-links {
+            flex-direction: column;
+            gap: 15px;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: var(--gray-800);
             background: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Navigation */
+        /* Navigation Header - Updated to match product page */
         .navbar {
             position: fixed;
             top: 0;
@@ -131,14 +139,21 @@
             box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         /* Hero Section */
         .hero {
             margin-top: 80px;
             background: linear-gradient(135deg, 
-                rgba(37, 99, 235, 0.05) 0%, 
-                rgba(59, 130, 246, 0.05) 50%, 
-                rgba(147, 197, 253, 0.05) 100%);
+                rgba(255, 107, 53, 0.05) 0%, 
+                rgba(255, 140, 66, 0.05) 50%, 
+                rgba(255, 179, 148, 0.05) 100%);
             padding: 6rem 0;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
@@ -151,483 +166,154 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('caretalker_camera.png'), /* 画像のパスを適切に設定してください */
-                radial-gradient(circle at 25% 25%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
-            background-position: 
-                85% 70%,    /* 装置画像を右上に配置 */
-                25% 25%, 
-                75% 75%;
-            background-size: 
-                500px auto, /* 装置画像のサイズ */
-                auto, 
-                auto;
-            background-repeat: no-repeat, no-repeat, no-repeat;
-            opacity: 0.45; /* 装置画像を薄くして背景に溶け込ませる */
+                radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 140, 66, 0.08) 0%, transparent 50%);
         }
 
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #111827;
+            letter-spacing: -0.02em;
             position: relative;
             z-index: 1;
         }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(37, 99, 235, 0.2);
+        /* Card Section */
+        .card-section {
+            padding: 8rem 0;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            background: #ffffff;
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            color: var(--gray-900);
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
+        .card-section.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--gray-600);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .card-section.light {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
         }
 
-        .hero-actions {
+        .card-section .cards-container {
             display: flex;
-            gap: 1rem;
+            gap: 30px;
             justify-content: center;
             flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--gray-700);
-            padding: 1rem 2rem;
-            border: 2px solid var(--gray-300);
-            border-radius: 12px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 8rem 0;
-            background: var(--white);
-            overflow: hidden;
-        }
-
-        .section-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        .section-header {
+        .card-section .cards-container .card {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .card-section .cards-container.grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 30px;
+            max-width: 800px;
+        }
+
+        .card-section .cards-container.grid .card {
+            flex: none;
+            min-width: auto;
+        }
+
+        .header {
             text-align: center;
             margin-bottom: 4rem;
         }
 
-        .section-badge {
-            display: inline-block;
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
+        .title {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: #111827;
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
         }
 
-        .section-description {
+        .title-underline {
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #ff8c42);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+        }
+
+        .subtitle {
             font-size: 1.125rem;
-            color: var(--gray-600);
+            color: #4b5563;
+            font-weight: normal;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .features-carousel {
-            position: relative;
-            height: 600px;
-            margin-top: 4rem;
-            touch-action: pan-y;
-            user-select: none;
-            overflow: hidden;
-        }
-
-        .features-container {
-            position: relative;
-            height: 100%;
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+            max-width: 800px;
             width: 100%;
-        }
-
-        .feature-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, 
-                rgba(255, 107, 53, 0.05) 0%, 
-                rgba(255, 140, 66, 0.05) 50%, 
-                rgba(255, 165, 85, 0.05) 100%);
-            border-radius: 32px;
-            overflow: hidden;
+            margin: 0 auto;
+            transition: all 0.3s ease;
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .feature-slide.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .feature-content {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            max-width: 900px;
-            width: 100%;
-            padding: 0 4rem;
-        }
-
-        .feature-visual {
-            flex: 0.8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            height: 400px;
-        }
-
-        .feature-illustration {
-            width: 200px;
-            height: 200px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            position: relative;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.25);
-            opacity: 0.85;
-        }
-
-        .feature-illustration::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 140, 66, 0.08));
-            border-radius: 28px;
-            z-index: -1;
-        }
-
-        .feature-info {
-            flex: 1.2;
-            text-align: left;
-        }
-
-        .feature-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .feature-description {
-            color: var(--gray-600);
-            font-size: 1.125rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .feature-highlights {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .highlight-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.75rem 1rem;
-            background: rgba(255, 107, 53, 0.05);
-            border-radius: 12px;
-            border-left: 3px solid var(--primary);
-        }
-
-        .highlight-icon {
-            width: 24px;
-            height: 24px;
-            background: var(--success);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .highlight-text {
-            color: var(--gray-700);
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 3rem;
-        }
-
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            border: none;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.7);
-            color: var(--gray-500);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            z-index: 10;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            opacity: 0.6;
-        }
-
-        .carousel-btn:hover {
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--gray-700);
-            transform: translateY(-50%) scale(1.05);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            opacity: 1;
-        }
-
-        .carousel-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            transform: translateY(-50%);
-        }
-
-        .carousel-btn:disabled:hover {
-            background: rgba(255, 255, 255, 0.7);
-            color: var(--gray-500);
-            transform: translateY(-50%);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            opacity: 0.3;
-        }
-
-        #prevBtn {
-            left: 20px;
-        }
-
-        #nextBtn {
-            right: 20px;
-        }
-
-        .carousel-dots {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--gray-300);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot:hover {
-            background: var(--primary-light);
-            transform: scale(1.3);
-        }
-
-        .dot.active {
-            background: var(--primary);
-            transform: scale(1.2);
-        }
-
-        /* How it Works */
-        .how-it-works {
-            padding: 8rem 0;
-            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
-        }
-
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .step {
-            text-align: center;
-            position: relative;
-        }
-
-        .step-number {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 auto 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .step-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 1rem;
-        }
-
-        .step-description {
-            color: var(--gray-600);
-            line-height: 1.6;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 8rem 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            text-align: center;
+            transform: translateY(30px);
             position: relative;
             overflow: hidden;
         }
 
-        .cta-section::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #ff8c42);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .cta-container {
-            position: relative;
-            z-index: 1;
+        .card-section.animate .card {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s, box-shadow 0.3s ease;
         }
 
-        .cta-title {
-            font-size: 2.5rem;
+        .card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
             font-weight: 700;
+            color: #111827;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
-        .cta-description {
-            font-size: 1.125rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+        .card-content {
+            color: #4b5563;
+            line-height: 1.7;
+            text-align: center;
         }
 
-        .btn-white {
-            background: white;
-            color: var(--primary);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-white:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Footer */
+        /* Footer - Updated to match product page */
         .footer {
             background: var(--gray-900);
             color: var(--gray-400);
@@ -667,97 +353,83 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-container {
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
             .nav-links {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-                margin-top: 1rem;
-                padding-top: 1rem;
-                border-top: 1px solid var(--gray-200);
+                display: none;
             }
 
-            .hero::before {
-                background-position: 
-                    110% 20%,    /* モバイルでは装置画像をさらに右上に */
-                    25% 25%, 
-                    75% 75%;
-                background-size: 
-                    250px auto, /* モバイルでは装置画像を小さく */
-                    auto, 
-                    auto;
+            .navbar {
+                padding: 0.75rem 0;
             }
 
-            .hero-title {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .section-title {
+            .card-section {
+                padding: 4rem 0;
+            }
+
+            .title {
                 font-size: 2rem;
             }
 
-            .cta-title {
-                font-size: 2rem;
+            .card {
+                padding: 2rem 1.5rem;
+                border-radius: 20px;
             }
 
-            .hero-actions {
+            .card-title {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .card-section .cards-container {
                 flex-direction: column;
-                align-items: center;
+                gap: 1.5rem;
+                padding: 0 1rem;
             }
 
-            .feature-content {
-                flex-direction: column;
-                gap: 3rem;
-                padding: 2rem;
-            }
-
-            .feature-visual {
-                height: 250px;
-            }
-
-            .feature-illustration {
-                width: 200px;
-                height: 200px;
-                font-size: 5rem;
-            }
-
-            .feature-title {
-                font-size: 1.8rem;
-                text-align: center;
-            }
-
-            .feature-info {
-                text-align: center;
-            }
-
-            .features-carousel {
-                height: 700px;
-            }
-
-            .steps-container {
+            .card-section .cards-container.grid {
                 grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 1.5rem;
             }
         }
 
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
+        @media (max-width: 480px) {
+            .header {
+                margin-bottom: 3rem;
+            }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .title {
+                font-size: 1.75rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+
+            .card-title {
+                font-size: 1.125rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation Header - Updated to match product page -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -767,8 +439,8 @@
                 Caretalker
             </div>
             <div class="nav-links">
-                <a href="#product" class="nav-link active">Product</a>
-                <a href="#team" class="nav-link">Team</a>
+                <a href="#product" class="nav-link">Product</a>
+                <a href="#team" class="nav-link active">Team</a>
             </div>
             <div style="display: flex; gap: 0.5rem;">
                 <a href="#signup" class="cta-button">デモ版</a>
@@ -778,170 +450,102 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-container">
-            <div class="hero-badge fade-in">
-                開発中
-            </div>
-            <h1 class="hero-title fade-in">
-                家族の安全を<br>
-                <span style="background: linear-gradient(135deg, var(--primary), var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">24時間見守る</span><br>
-                AIケアシステム
-            </h1>
-            <p class="hero-subtitle fade-in">
-                最先端のAI技術で大切な家族を見守るシステムを開発中。介護の不安を解消し、安心できる毎日をサポートする革新的なソリューションです。
-            </p>
-
+        <div class="container">
+            <h1>テクノロジーで未来を豊かに</h1>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="section-container">
-            <div class="section-header fade-in">
-                <div class="section-badge">開発予定機能</div>
-                <h2 class="section-title">Caretalkerが目指すもの</h2>
-                <p class="section-description">
-                    従来の見守りサービスとは一線を画す、革新的な機能の開発を進めています。
-                </p>
-            </div>
-            
-            <div class="features-carousel">
-                <div class="features-container" id="featuresContainer">
-                    <!-- Slide 1: 対話で体調をうかがう -->
-                    <div class="feature-slide active">
-                        <div class="feature-content">
-                            <div class="feature-visual">
-                                <div class="feature-illustration">
-                                    💬
-                                </div>
-                            </div>
-                            <div class="feature-info">
-                                <h3 class="feature-title">AIとの対話機能</h3>
-                                <p class="feature-description">
-                                    毎日の自然な会話を通じて、体調や気分の変化を優しく見守ります。
-                                </p>
+    <!-- Card Section 1 -->
+    <section class="card-section">
+        <div class="header">
+            <h1 class="title">ABOUT US</h1>
+            <div class="title-underline"></div>
+            <p class="subtitle">私たちについて</p>
+        </div>
 
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2: 施設との連携 -->
-                    <div class="feature-slide">
-                        <div class="feature-content">
-                            <div class="feature-visual">
-                                <div class="feature-illustration">
-                                    🏥
-                                </div>
-                            </div>
-                            <div class="feature-info">
-                                <h3 class="feature-title">施設連携システム</h3>
-                                <p class="feature-description">
-                                    デイサービスや医療機関と情報を共有し、継続的なケアを実現します。
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3: カルテ・レポート自動作成 -->
-                    <div class="feature-slide">
-                        <div class="feature-content">
-                            <div class="feature-visual">
-                                <div class="feature-illustration">
-                                    📋
-                                </div>
-                            </div>
-                            <div class="feature-info">
-                                <h3 class="feature-title">自動レポート作成</h3>
-                                <p class="feature-description">
-                                    日々の活動データから、詳細なカルテやケアレポートを自動生成します。
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 4: 玄関での設置 -->
-                    <div class="feature-slide">
-                        <div class="feature-content">
-                            <div class="feature-visual">
-                                <div class="feature-illustration">
-                                    🚪
-                                </div>
-                            </div>
-                            <div class="feature-info">
-                                <h3 class="feature-title">玄関設置システム</h3>
-                                <p class="feature-description">
-                                    玄関に設置するだけで、外出・帰宅の見守りと安全確認を行います。
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-controls">
-                    <div class="carousel-dots">
-                        <div class="dot active" onclick="goToSlide(0)"></div>
-                        <div class="dot" onclick="goToSlide(1)"></div>
-                        <div class="dot" onclick="goToSlide(2)"></div>
-                        <div class="dot" onclick="goToSlide(3)"></div>
-                    </div>
-                </div>
-                
-                <button class="carousel-btn" id="prevBtn">‹</button>
-                <button class="carousel-btn" id="nextBtn">›</button>
+        <div class="card">
+            <div class="card-content">
+                ここにコンテンツを入力してください。
             </div>
         </div>
     </section>
 
-    <!-- How it Works -->
-    <section class="how-it-works">
-        <div class="section-container">
-            <div class="section-header fade-in">
-                <div class="section-badge">目指しているもの</div>
-                <h2 class="section-title">メリット</h2>
-                <p class="section-description">
-                    導入することで得られる価値
-                </p>
+    <!-- Card Section 2 -->
+    <section class="card-section light">
+        <div class="header">
+            <h1 class="title">タイトル２</h1>
+            <div class="title-underline"></div>
+            <p class="subtitle">サブタイトル２</p>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">代表メッセージ</h2>
+            <div class="card-content">
+                ここにコンテンツを入力してください。
             </div>
-            
-<div class="steps-container">
-                <div class="step fade-in">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">安心感の向上</h3>
-                    <p class="step-description">
-                        AIが会話や外出状況を分析し、異常を検知した際は家族や緊急サービスへ即時連絡することで迅速な対応を可能にする。
-                    </p>
-                </div>
-                
-                <div class="step fade-in">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">尊厳の維持</h3>
-                    <p class="step-description">
-                        プライベート空間には介入せず、玄関で見守る仕組みにより、徘徊リスクを管理しながらプライバシーを守る。
-                    </p>
-                </div>
-                
-                <div class="step fade-in">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">その時の状況把握</h3>
-                    <p class="step-description">
-                        会話や映像記録により、万が一の徘徊時にも発見をサポートできる。
-                    </p>
-                </div>
-                
-                <div class="step fade-in">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">介護施設による第３の目</h3>
-                    <p class="step-description">
-                        AIが日常の会話や行動から認知状態を記録分析し、そのデータを医療機関や介護施設と共有することで、認知症の進行や変化を専門家や家族が把握しやすくなる仕組み。
-                    </p>
-                </div>
-            </div>
+        </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Card Section 3 -->
+    <section class="card-section">
+        <div class="header">
+            <h1 class="title">チーム紹介</h1>
+            <div class="title-underline"></div>
+            <p class="subtitle">専門分野</p>
+        </div>
+
+        <div class="cards-container grid">
+            <div class="card">
+                <h2 class="card-title">ハードウェア開発</h2>
+                <div class="card-content">
+                    
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">バックエンド開発</h2>
+                <div class="card-content">
+                    
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">AIシステム開発</h2>
+                <div class="card-content">
+                    
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">UIデザイン</h2>
+                <div class="card-content">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Section 4 -->
+    <section class="card-section light">
+        <div class="header">
+            <h1 class="title">実績・活動紹介</h1>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="cards-container">
+            <div class="card">
+                <h2 class="card-title">カードタイトル４-１</h2>
+                <div class="card-content">
+                    ここにコンテンツを入力してください。
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">カードタイトル４-２</h2>
+                <div class="card-content">
+                    ここにコンテンツを入力してください。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Updated to match product page -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-links">
@@ -957,39 +561,27 @@
     </footer>
 
     <script>
-        // Smooth scrolling animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        // スクロールアニメーションの設定
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('.card-section');
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // セクションが画面に入ったらアニメーションを開始
+                if (rect.top < windowHeight * 0.8) {
+                    section.classList.add('animate');
                 }
             });
-        }, observerOptions);
+        }
 
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
+        // スクロールイベントリスナー
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // ページ読み込み時にも実行
+        window.addEventListener('load', animateOnScroll);
+        
         // Navbar background on scroll
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
@@ -999,132 +591,6 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
-
-        // Features Carousel
-        let currentSlide = 0;
-        const totalSlides = 4;
-        const featuresContainer = document.getElementById('featuresContainer');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const dots = document.querySelectorAll('.dot');
-
-        function updateCarousel() {
-            const slides = document.querySelectorAll('.feature-slide');
-            
-            // Remove active class from all slides
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-            
-            // Update dots
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-            
-            // Update buttons
-            prevBtn.disabled = currentSlide === 0;
-            nextBtn.disabled = currentSlide === totalSlides - 1;
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateCarousel();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateCarousel();
-            }
-        }
-
-        // Button event listeners
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                prevSlide();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            }
-        });
-
-        // Touch/Swipe support
-        let startX = 0;
-        let endX = 0;
-        let startY = 0;
-        let endY = 0;
-
-        featuresContainer.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        });
-
-        featuresContainer.addEventListener('touchend', (e) => {
-            endX = e.changedTouches[0].clientX;
-            endY = e.changedTouches[0].clientY;
-            
-            const deltaX = startX - endX;
-            const deltaY = Math.abs(startY - endY);
-            
-            // Only trigger swipe if horizontal movement is greater than vertical
-            if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 50) {
-                if (deltaX > 0) {
-                    nextSlide();
-                } else {
-                    prevSlide();
-                }
-            }
-        });
-
-        // Mouse drag support for desktop
-        let isDragging = false;
-        let mouseStartX = 0;
-
-        featuresContainer.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            mouseStartX = e.clientX;
-            featuresContainer.style.cursor = 'grabbing';
-        });
-
-        featuresContainer.addEventListener('mouseup', (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            featuresContainer.style.cursor = 'grab';
-            
-            const mouseEndX = e.clientX;
-            const deltaX = mouseStartX - mouseEndX;
-            
-            if (Math.abs(deltaX) > 100) { // Minimum drag distance
-                if (deltaX > 0) {
-                    nextSlide();
-                } else {
-                    prevSlide();
-                }
-            }
-        });
-
-        featuresContainer.addEventListener('mouseleave', () => {
-            if (isDragging) {
-                isDragging = false;
-                featuresContainer.style.cursor = 'grab';
-            }
-        });
-
-        // Initialize carousel
-        updateCarousel();
     </script>
 </body>
 </html>
-
-
-
