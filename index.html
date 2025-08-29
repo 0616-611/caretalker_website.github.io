@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>テクノロジーで未来を豊かに</title>
+    <title>Caretalker - 家族の安全を24時間見守るAIケアシステム</title>
     <style>
         :root {
             --primary: #ff6b35;
@@ -31,22 +31,14 @@
             box-sizing: border-box;
         }
 
-        .footer-links {
-            flex-direction: column;
-            gap: 15px;
-        }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: var(--gray-800);
             background: var(--white);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* Navigation Header - Updated to match product page */
+        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -100,11 +92,15 @@
         }
 
         .nav-link {
-            text-decoration: none;
+            background: none;
+            border: none;
             color: var(--gray-600);
             font-weight: 500;
+            cursor: pointer;
             transition: color 0.2s ease;
             position: relative;
+            font-size: 1rem;
+            font-family: inherit;
         }
 
         .nav-link.active {
@@ -139,6 +135,18 @@
             box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
         }
 
+        /* Page Content */
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .page-content.active {
+            display: block;
+            opacity: 1;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -149,13 +157,19 @@
         .hero {
             margin-top: 80px;
             background: linear-gradient(135deg, 
+                rgba(37, 99, 235, 0.05) 0%, 
+                rgba(59, 130, 246, 0.05) 50%, 
+                rgba(147, 197, 253, 0.05) 100%);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero.team {
+            background: linear-gradient(135deg, 
                 rgba(255, 107, 53, 0.05) 0%, 
                 rgba(255, 140, 66, 0.05) 50%, 
                 rgba(255, 179, 148, 0.05) 100%);
-            padding: 6rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
         .hero::before {
@@ -166,21 +180,347 @@
             right: 0;
             bottom: 0;
             background-image: 
+                url('caretalker_camera.png'),
+                radial-gradient(circle at 25% 25%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+            background-position: 
+                85% 70%,
+                25% 25%, 
+                75% 75%;
+            background-size: 
+                500px auto,
+                auto, 
+                auto;
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            opacity: 0.45;
+        }
+
+        .hero.team::before {
+            background-image: 
                 radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, rgba(255, 140, 66, 0.08) 0%, transparent 50%);
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            color: #111827;
-            letter-spacing: -0.02em;
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
             position: relative;
             z-index: 1;
         }
 
-        /* Card Section */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 0;
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-carousel {
+            position: relative;
+            height: 600px;
+            margin-top: 4rem;
+            touch-action: pan-y;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .features-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .feature-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 53, 0.05) 0%, 
+                rgba(255, 140, 66, 0.05) 50%, 
+                rgba(255, 165, 85, 0.05) 100%);
+            border-radius: 32px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .feature-slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .feature-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 900px;
+            width: 100%;
+            padding: 0 4rem;
+        }
+
+        .feature-visual {
+            flex: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 400px;
+        }
+
+        .feature-illustration {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.25);
+            opacity: 0.85;
+        }
+
+        .feature-illustration::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 140, 66, 0.08));
+            border-radius: 28px;
+            z-index: -1;
+        }
+
+        .feature-info {
+            flex: 1.2;
+            text-align: left;
+        }
+
+        .feature-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .feature-description {
+            color: var(--gray-600);
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--gray-500);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0.6;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--gray-700);
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            opacity: 1;
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+
+        .carousel-btn:disabled:hover {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--gray-500);
+            transform: translateY(-50%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0.3;
+        }
+
+        #prevBtn {
+            left: 20px;
+        }
+
+        #nextBtn {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gray-300);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot:hover {
+            background: var(--primary-light);
+            transform: scale(1.3);
+        }
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* How it Works */
+        .how-it-works {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Team Page Styles */
         .card-section {
             padding: 8rem 0;
             text-align: center;
@@ -313,44 +653,7 @@
             text-align: center;
         }
 
-        /* Footer - Updated to match product page */
-        .footer {
-            background: var(--gray-900);
-            color: var(--gray-400);
-            padding: 3rem 0 2rem;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-link {
-            color: var(--gray-400);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .footer-link:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid var(--gray-800);
-            color: var(--gray-500);
-        }
-        /* 活動カード用のスタイル */
+        /* Activity Cards */
         .activity-cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -440,38 +743,115 @@
             color: #ff6b35;
             font-weight: 700;
         }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-800);
+            color: var(--gray-500);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .navbar {
-                padding: 0.75rem 0;
-            }
-
             .nav-container {
-                padding: 0 1rem;
+                flex-wrap: wrap;
+                justify-content: space-between;
             }
 
-            .logo {
-                font-size: 1.25rem;
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid var(--gray-200);
             }
 
-            .hero {
-                padding: 4rem 0;
+            .hero::before {
+                background-position: 
+                    110% 20%,
+                    25% 25%, 
+                    75% 75%;
+                background-size: 
+                    250px auto,
+                    auto, 
+                    auto;
             }
 
-            .hero h1 {
+            .hero-title {
                 font-size: 2.5rem;
+            }
+
+            .section-title, .title {
+                font-size: 2rem;
+            }
+
+            .feature-content {
+                flex-direction: column;
+                gap: 3rem;
+                padding: 2rem;
+            }
+
+            .feature-visual {
+                height: 250px;
+            }
+
+            .feature-illustration {
+                width: 200px;
+                height: 200px;
+                font-size: 5rem;
+            }
+
+            .feature-title {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .feature-info {
+                text-align: center;
+            }
+
+            .features-carousel {
+                height: 700px;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
             }
 
             .card-section {
                 padding: 4rem 0;
-            }
-
-            .title {
-                font-size: 2rem;
             }
 
             .card {
@@ -495,74 +875,29 @@
                 grid-template-rows: auto;
                 gap: 1.5rem;
             }
-        }
 
-        @media (max-width: 480px) {
-            .header {
-                margin-bottom: 3rem;
-            }
-
-            .title {
-                font-size: 1.75rem;
-            }
-
-            .card {
-                padding: 1.5rem;
-                border-radius: 16px;
-            }
-
-            .card-title {
-                font-size: 1.125rem;
-            }
-        }
-        @media (max-width: 768px) {
             .activity-cards-container {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
                 padding: 1rem;
             }
-            
-            .activity-card {
-                border-radius: 12px;
-            }
-            
-            .activity-month {
-                padding: 0.8rem 1rem;
-                font-size: 1.1rem;
-            }
-            
-            .activity-content {
-                padding: 1.5rem 1rem;
-            }
-            
-            .activity-content h3 {
-                font-size: 1.1rem;
-            }
-            }
+        }
 
-            @media (max-width: 480px) {
-                .activity-content {
-                    padding: 1.2rem 0.8rem;
-                }
-                
-                .activity-month {
-                    padding: 0.7rem 0.8rem;
-                    font-size: 1rem;
-                }
-                
-                .activity-content h3 {
-                    font-size: 1rem;
-                    margin-bottom: 0.8rem;
-                }
-                
-                .activity-content p {
-                    font-size: 0.9rem;
-                }
-            }
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation Header - Updated to match product page -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -572,8 +907,8 @@
                 Caretalker
             </div>
             <div class="nav-links">
-                <a href="#product" class="nav-link">Product</a>
-                <a href="#team" class="nav-link active">Team</a>
+                <button class="nav-link active" onclick="showPage('product')">Product</button>
+                <button class="nav-link" onclick="showPage('team')">Team</button>
             </div>
             <div style="display: flex; gap: 0.5rem;">
                 <a href="https://caretalker.github.io/demo/demo_index.html" class="cta-button">デモ版</a>
@@ -581,146 +916,313 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>テクノロジーで未来を豊かに</h1>
-        </div>
-    </section>
-
-    <!-- Card Section 1 -->
-    <section class="card-section">
-        <div class="header">
-            <h1 class="title">ABOUT US</h1>
-            <div class="title-underline"></div>
-            <p class="subtitle">私たちについて</p>
-        </div>
-
-        <div class="card">
-            <div class="card-content" style="text-align: left;">
-                <p>　私たちは高専で出会い、テクノロジーを通じて社会の課題を解決することを目指して活動している学生チームです。
-                これまでに、認知症の徘徊を未然に防ぐ見守りシステム「CareTalker」の開発に取り組むなど、福祉や社会課題の現場に根ざしたプロダクトづくりを進めてきました。</p>
-                <br>
-                <p>　私たちの強みは、ソフトウェアからハードウェア、サーバーやインフラの設計までを一貫して行える技術力にあります。アプリケーション開発、回路設計、クラウド環境の構築といった幅広い領域に対応し、新しいテクノロジーを常に学びながらアップデートを続けています。</p>
-                <br>
-                <p>　学生チームならではの柔軟な発想とスピード感を活かし、依頼者の課題に合わせた最適なソリューションを提供します。「どんなに小さなアイデアでも形にする」――その姿勢で、受託開発を通じて企業や社会の成長に貢献していきます。</p>
+    <!-- Product Page Content -->
+    <div id="product-page" class="page-content active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-badge fade-in">
+                    開発中
+                </div>
+                <h1 class="hero-title fade-in">
+                    家族の安全を<br>
+                    <span style="background: linear-gradient(135deg, var(--primary), var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">24時間見守る</span><br>
+                    対話型AIケアシステム
+                </h1>
+                <p class="hero-subtitle fade-in">
+                    最先端のAI技術で大切な家族を見守るシステムを開発中。介護の不安を解消し、安心できる毎日をサポートする革新的なソリューションです。
+                </p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Card Section 2 -->
-    <section class="card-section light">
-        <div class="header">
-            <h1 class="title">代表メッセージ</h1>
-            <div class="title-underline"></div>
-        </div>
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="section-container">
+                <div class="section-header fade-in">
+                    <div class="section-badge">開発予定機能</div>
+                    <h2 class="section-title">Caretalkerが目指すもの</h2>
+                    <p class="section-description">
+                        従来の見守りサービスとは一線を画す、革新的な機能の開発を進めています。
+                    </p>
+                </div>
+                
+                <div class="features-carousel">
+                    <div class="features-container" id="featuresContainer">
+                        <!-- Slide 1: 対話で体調をうかがう -->
+                        <div class="feature-slide active">
+                            <div class="feature-content">
+                                <div class="feature-visual">
+                                    <div class="feature-illustration">
+                                        💬
+                                    </div>
+                                </div>
+                                <div class="feature-info">
+                                    <h3 class="feature-title">AIとの対話機能</h3>
+                                    <p class="feature-description">
+                                        毎日の自然な会話を通じて、体調や気分の変化を優しく見守ります。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="card">
-            <div class="card-content" style="text-align: left;">
-                <p>　私は「テクノロジーで社会の課題を解決する」ことを目標に活動しています。受託開発は単なる作業の提供ではなく、依頼者の皆さまと共に未来をつくる共同作業だと考えています。</p>
-                <br>
-                <p>
-                　私が特に力を入れている取り組みが、認知症の徘徊を未然に防ぐ見守りシステム 「CareTalker」 です。
-                社会課題の解決から出発し、AI・ハードウェア・クラウドを組み合わせた実用的なプロダクトとして形にしてきました。</p>
-                <br>
-                <p>
-                　学生という立場だからこそ、固定概念にとらわれない柔軟な発想で新しい挑戦に取り組むことができます。
-                同時に、確かな技術力と責任感をもって最後までやりきることを大切にしています。</p>
-                <br>
-                <P>
-                　社内業務の効率化や売上向上につながる仕組みづくりを通じて、企業や社会に貢献していきたいと考えています。
-                どんなに小さなアイデアでも、一緒に形にしていけるパートナーでありたい。
-                そうした思いで、皆さまからのご相談を心よりお待ちしています。</P>
+                        <!-- Slide 2: 施設との連携 -->
+                        <div class="feature-slide">
+                            <div class="feature-content">
+                                <div class="feature-visual">
+                                    <div class="feature-illustration">
+                                        🏥
+                                    </div>
+                                </div>
+                                <div class="feature-info">
+                                    <h3 class="feature-title">施設連携システム</h3>
+                                    <p class="feature-description">
+                                        デイサービスや医療機関と情報を共有し、継続的なケアを実現します。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3: カルテ・レポート自動作成 -->
+                        <div class="feature-slide">
+                            <div class="feature-content">
+                                <div class="feature-visual">
+                                    <div class="feature-illustration">
+                                        📋
+                                    </div>
+                                </div>
+                                <div class="feature-info">
+                                    <h3 class="feature-title">自動レポート作成</h3>
+                                    <p class="feature-description">
+                                        日々の活動データから、詳細なカルテやケアレポートを自動生成します。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4: 玄関での設置 -->
+                        <div class="feature-slide">
+                            <div class="feature-content">
+                                <div class="feature-visual">
+                                    <div class="feature-illustration">
+                                        🚪
+                                    </div>
+                                </div>
+                                <div class="feature-info">
+                                    <h3 class="feature-title">玄関設置システム</h3>
+                                    <p class="feature-description">
+                                        玄関に設置するだけで、外出・帰宅の見守りと安全確認を行います。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-controls">
+                        <div class="carousel-dots">
+                            <div class="dot active" onclick="goToSlide(0)"></div>
+                            <div class="dot" onclick="goToSlide(1)"></div>
+                            <div class="dot" onclick="goToSlide(2)"></div>
+                            <div class="dot" onclick="goToSlide(3)"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn" id="prevBtn">‹</button>
+                    <button class="carousel-btn" id="nextBtn">›</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Card Section 3 -->
-    <section class="card-section">
-        <div class="header">
-            <h1 class="title">チーム紹介</h1>
-            <div class="title-underline"></div>
-            <p class="subtitle">専門分野</p>
-        </div>
+        <!-- How it Works -->
+        <section class="how-it-works">
+            <div class="section-container">
+                <div class="section-header fade-in">
+                    <div class="section-badge">目指しているもの</div>
+                    <h2 class="section-title">メリット</h2>
+                    <p class="section-description">
+                        導入することで得られる価値
+                    </p>
+                </div>
+                
+                <div class="steps-container">
+                    <div class="step fade-in">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">安心感の向上</h3>
+                        <p class="step-description">
+                            AIが会話や外出状況を分析し、異常を検知した際は家族や緊急サービスへ即時連絡することで迅速な対応を可能にする。
+                        </p>
+                    </div>
+                    
+                    <div class="step fade-in">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">尊厳の維持</h3>
+                        <p class="step-description">
+                            プライベート空間には介入せず、玄関で見守る仕組みにより、徘徊リスクを管理しながらプライバシーを守る。
+                        </p>
+                    </div>
+                    
+                    <div class="step fade-in">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">その時の状況把握</h3>
+                        <p class="step-description">
+                            会話や映像記録により、万が一の徘徊時にも発見をサポートできる。
+                        </p>
+                    </div>
+                    
+                    <div class="step fade-in">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">介護施設による第３の目</h3>
+                        <p class="step-description">
+                            AIが日常の会話や行動から認知状態を記録分析し、そのデータを医療機関や介護施設と共有することで、認知症の進行や変化を専門家や家族が把握しやすくなる仕組み。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-        <div class="cards-container grid">
+    <!-- Team Page Content -->
+    <div id="team-page" class="page-content">
+        <!-- Hero Section -->
+        <section class="hero team">
+            <div class="container" style="text-align: center;">
+                <h1>テクノロジーで未来を豊かに</h1>
+            </div>
+        </section>
+
+        <!-- Card Section 1 -->
+        <section class="card-section">
+            <div class="header">
+                <h1 class="title">ABOUT US</h1>
+                <div class="title-underline"></div>
+                <p class="subtitle">私たちについて</p>
+            </div>
+
             <div class="card">
-                <h2 class="card-title">ハードウェア開発</h2>
-                <div class="card-content">
-                    
+                <div class="card-content" style="text-align: left;">
+                    <p>　私たちは高専で出会い、テクノロジーを通じて社会の課題を解決することを目指して活動している学生チームです。
+                    これまでに、認知症の徘徊を未然に防ぐ見守りシステム「CareTalker」の開発に取り組むなど、福祉や社会課題の現場に根ざしたプロダクトづくりを進めてきました。</p>
+                    <br>
+                    <p>　私たちの強みは、ソフトウェアからハードウェア、サーバーやインフラの設計までを一貫して行える技術力にあります。アプリケーション開発、回路設計、クラウド環境の構築といった幅広い領域に対応し、新しいテクノロジーを常に学びながらアップデートを続けています。</p>
+                    <br>
+                    <p>　学生チームならではの柔軟な発想とスピード感を活かし、依頼者の課題に合わせた最適なソリューションを提供します。「どんなに小さなアイデアでも形にする」――その姿勢で、受託開発を通じて企業や社会の成長に貢献していきます。</p>
                 </div>
             </div>
-            <div class="card">
-                <h2 class="card-title">バックエンド開発</h2>
-                <div class="card-content">
-                    
-                </div>
-            </div>
-            <div class="card">
-                <h2 class="card-title">AIシステム開発</h2>
-                <div class="card-content">
-                    
-                </div>
-            </div>
-            <div class="card">
-                <h2 class="card-title">UIデザイン</h2>
-                <div class="card-content">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Card Section 4 - 実績・活動紹介（タイムライン形式に変更） -->
-    <section class="card-section light">
-        <div class="header">
-            <h1 class="title">実績・活動紹介</h1>
-            <div class="title-underline"></div>
-            <p class="subtitle">プロジェクトの歩み</p>
-        </div>
+        <!-- Card Section 2 -->
+        <section class="card-section light">
+            <div class="header">
+                <h1 class="title">代表メッセージ</h1>
+                <div class="title-underline"></div>
+            </div>
 
-        <div class="activity-cards-container">
-            <div class="activity-card">
-                <div class="activity-month">4月</div>
-                <div class="activity-content">
-                    <h3>プロジェクト開始</h3>
-                    <p>CareTalkerプロジェクトが本格始動</p>
+            <div class="card">
+                <div class="card-content" style="text-align: left;">
+                    <p>　私は「テクノロジーで社会の課題を解決する」ことを目標に活動しています。受託開発は単なる作業の提供ではなく、依頼者の皆さまと共に未来をつくる共同作業だと考えています。</p>
+                    <br>
+                    <p>
+                    　私が特に力を入れている取り組みが、認知症の徘徊を未然に防ぐ見守りシステム 「CareTalker」 です。
+                    社会課題の解決から出発し、AI・ハードウェア・クラウドを組み合わせた実用的なプロダクトとして形にしてきました。</p>
+                    <br>
+                    <p>
+                    　学生という立場だからこそ、固定概念にとらわれない柔軟な発想で新しい挑戦に取り組むことができます。
+                    同時に、確かな技術力と責任感をもって最後までやりきることを大切にしています。</p>
+                    <br>
+                    <P>
+                    　社内業務の効率化や売上向上につながる仕組みづくりを通じて、企業や社会に貢献していきたいと考えています。
+                    どんなに小さなアイデアでも、一緒に形にしていけるパートナーでありたい。
+                    そうした思いで、皆さまからのご相談を心よりお待ちしています。</P>
                 </div>
             </div>
-            
-            <div class="activity-card">
-                <div class="activity-month">6月</div>
-                <div class="activity-content">
-                    <h3>現場調査・ヒアリング</h3>
-                    <p>カーロガーデン八王子<br>
-                    介護老人保健施設サルビア<br>
-                    優っくりグループホーム中央湊<br>
-                    日本AIメディカル学会参加</p>
-                </div>
-            </div>
-            
-            <div class="activity-card milestone">
-                <div class="activity-month">7月</div>
-                <div class="activity-content">
-                    <h3>開発フェーズ移行</h3>
-                    <p>アンジェス八王子高尾<br>
-                    <strong>要件定義終了・開発開始</strong><br><br>
-                    
-                </div>
-            </div>
-            
-            <div class="activity-card milestone">
-                <div class="activity-month">8月</div>
-                <div class="activity-content">
-                    <h3>プロトタイプ完成</h3>
-                    <p>8月上旬<strong>初号機開発</strong><br>Kaggle出場<br>
-                    8月下旬　二号機開発<br>shift ai</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer - Updated to match product page -->
+        <!-- Card Section 3 -->
+        <section class="card-section">
+            <div class="header">
+                <h1 class="title">チーム紹介</h1>
+                <div class="title-underline"></div>
+                <p class="subtitle">専門分野</p>
+            </div>
+
+            <div class="cards-container grid">
+                <div class="card">
+                    <h2 class="card-title">ハードウェア開発</h2>
+                    <div class="card-content">
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <h2 class="card-title">バックエンド開発</h2>
+                    <div class="card-content">
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <h2 class="card-title">AIシステム開発</h2>
+                    <div class="card-content">
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <h2 class="card-title">UIデザイン</h2>
+                    <div class="card-content">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card Section 4 - 実績・活動紹介（タイムライン形式に変更） -->
+        <section class="card-section light">
+            <div class="header">
+                <h1 class="title">実績・活動紹介</h1>
+                <div class="title-underline"></div>
+                <p class="subtitle">プロジェクトの歩み</p>
+            </div>
+
+            <div class="activity-cards-container">
+                <div class="activity-card">
+                    <div class="activity-month">4月</div>
+                    <div class="activity-content">
+                        <h3>プロジェクト開始</h3>
+                        <p>CareTalkerプロジェクトが本格始動</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-month">6月</div>
+                    <div class="activity-content">
+                        <h3>現場調査・ヒアリング</h3>
+                        <p>カーロガーデン八王子<br>
+                        介護老人保健施設サルビア<br>
+                        優っくりグループホーム中央湊<br>
+                        日本AIメディカル学会参加</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card milestone">
+                    <div class="activity-month">7月</div>
+                    <div class="activity-content">
+                        <h3>開発フェーズ移行</h3>
+                        <p>アンジェス八王子高尾<br>
+                        <strong>要件定義終了・開発開始</strong><br><br>
+                        
+                    </div>
+                </div>
+                
+                <div class="activity-card milestone">
+                    <div class="activity-month">8月</div>
+                    <div class="activity-content">
+                        <h3>プロトタイプ完成</h3>
+                        <p>8月上旬　<strong>初号機開発</strong><br>Kaggle出場<br>
+                        8月下旬　二号機開発<br>shift ai</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-links">
@@ -736,37 +1238,193 @@
     </footer>
 
     <script>
-        // スクロールアニメーションの設定
+        // Page switching functionality
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageName + '-page').classList.add('active');
+
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked nav link
+            event.target.classList.add('active');
+
+            // Reset scroll position
+            window.scrollTo(0, 0);
+
+            // Re-trigger animations for team page
+            if (pageName === 'team') {
+                setTimeout(() => {
+                    animateOnScroll();
+                }, 100);
+            }
+
+            // Re-trigger fade-in animations for product page
+            if (pageName === 'product') {
+                setTimeout(() => {
+                    initProductAnimations();
+                }, 100);
+            }
+        }
+
+        // Product page animations
+        function initProductAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements in product page
+            document.querySelectorAll('#product-page .fade-in').forEach(el => {
+                el.classList.remove('visible');
+                observer.observe(el);
+            });
+        }
+
+        // Team page scroll animations
         function animateOnScroll() {
-            const sections = document.querySelectorAll('.card-section');
+            const sections = document.querySelectorAll('#team-page .card-section');
             
             sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
                 
-                // セクションが画面に入ったらアニメーションを開始
                 if (rect.top < windowHeight * 0.8) {
                     section.classList.add('animate');
                 }
             });
         }
 
-        // スクロールイベントリスナー
-        window.addEventListener('scroll', animateOnScroll);
-        
-        // ページ読み込み時にも実行
-        window.addEventListener('load', animateOnScroll);
-        
-        // Navbar background on scroll
+        // Features Carousel (for product page)
+        let currentSlide = 0;
+        const totalSlides = 4;
+
+        function updateCarousel() {
+            const slides = document.querySelectorAll('.feature-slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateCarousel();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateCarousel();
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize carousel
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', prevSlide);
+                nextBtn.addEventListener('click', nextSlide);
+                updateCarousel();
+            }
+
+            // Initialize product page animations
+            initProductAnimations();
+
+            // Keyboard navigation for carousel
+            document.addEventListener('keydown', (e) => {
+                if (document.getElementById('product-page').classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                    } else if (e.key === 'ArrowRight') {
+                        nextSlide();
+                    }
+                }
+            });
+
+            // Touch/Swipe support for carousel
+            const featuresContainer = document.getElementById('featuresContainer');
+            if (featuresContainer) {
+                let startX = 0;
+                let endX = 0;
+                let startY = 0;
+                let endY = 0;
+
+                featuresContainer.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                });
+
+                featuresContainer.addEventListener('touchend', (e) => {
+                    endX = e.changedTouches[0].clientX;
+                    endY = e.changedTouches[0].clientY;
+                    
+                    const deltaX = startX - endX;
+                    const deltaY = Math.abs(startY - endY);
+                    
+                    if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 50) {
+                        if (deltaX > 0) {
+                            nextSlide();
+                        } else {
+                            prevSlide();
+                        }
+                    }
+                });
+            }
+        });
+
+        // Scroll event listeners
         window.addEventListener('scroll', () => {
+            // Navbar background change
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
                 navbar.style.background = 'rgba(255, 255, 255, 0.98)';
             } else {
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
+
+            // Team page animations
+            if (document.getElementById('team-page').classList.contains('active')) {
+                animateOnScroll();
+            }
         });
     </script>
 </body>
 </html>
-
