@@ -653,8 +653,18 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
             .nav-links {
-                display: none;
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid var(--gray-200);
             }
 
             .hero-title {
@@ -736,7 +746,7 @@
                 <a href="#team" class="nav-link">Team</a>
             </div>
             <div style="display: flex; gap: 0.5rem;">
-                <a href="#signup" class="cta-button">デモ版</a>
+                <a href="#signup" class="cta-button">デモアカウント</a>
             </div>
         </div>
     </nav>
